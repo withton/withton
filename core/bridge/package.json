@@ -1,8 +1,21 @@
 {
-  "name": "bridge",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@withton/bridge",
+  "version": "0.0.5",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -10,7 +23,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "crypto-browserify": "^3.12.0",
     "js-base64": "^3.7.7",
+    "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -26,7 +41,28 @@
     "nx": "19.5.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-dts": "^4.1.0",
+    "vite-plugin-node-polyfills": "^0.22.0"
   },
-  "nx": {}
+  "nx": {},
+  "author": "itsalimanuel",
+  "license": "MIT",
+  "description": "is a powerful and flexible library designed to facilitate secure communication and data exchange between different components or services within your application. It leverages cryptographic techniques to ensure the integrity and confidentiality of the data being transmitted.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsalimanuel/withton/core/bridge"
+  },
+  "keywords": [
+    "Ton",
+    "tonnetwork",
+    "wallets",
+    "connectors",
+    "connect",
+    "wallet",
+    "connect",
+    "ton",
+    "crypto",
+    "blockchain"
+  ]
 }

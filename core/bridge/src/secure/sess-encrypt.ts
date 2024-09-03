@@ -1,32 +1,53 @@
 import { KeyGen } from "./key-gen";
 import { mergeByteArrays, divideByteArray, convertToHex } from "../utils";
-import {
-  createECDH,
-  randomBytes,
-  createCipheriv,
-  createDecipheriv,
-} from "crypto";
 
 export class SessionCrypto {
-  private readonly nonceLength = 16; // 16 bytes for AES-GCM nonce
+  private readonly nonceLength = 12; // 12 bytes for AES-GCM nonce
 
-  private readonly keyGen: KeyGen;
-
+  private keyGen!: KeyGen;
   public readonly sessionId: string;
 
   constructor(keyGen?: KeyGen) {
-    this.keyGen = keyGen
-      ? this.createKeyGenFromString(keyGen)
-      : this.generateKeyGen();
-    this.sessionId = convertToHex(Buffer.from(this.keyGen.publicKey, "hex"));
+    if (keyGen) {
+      this.keyGen = this.createKeyGenFromString(keyGen);
+      this.sessionId = convertToHex(Buffer.from(this.keyGen.publicKey, "hex"));
+    } else {
+      throw new Error("Initialization required");
+    }
   }
 
-  private generateKeyGen(): KeyGen {
-    const ecdh = createECDH("secp256k1");
-    ecdh.generateKeys();
+  public async initialize(keyGen?: KeyGen): Promise<void> {
+    if (!keyGen) {
+      this.keyGen = await this.generateKeyGen();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this as any).sessionId = convertToHex(
+        Buffer.from(this.keyGen.publicKey, "hex"),
+      );
+    }
+  }
+
+  private async generateKeyGen(): Promise<KeyGen> {
+    const keyPair = await window.crypto.subtle.generateKey(
+      {
+        name: "ECDH",
+        namedCurve: "P-256",
+      },
+      true,
+      ["deriveKey"],
+    );
+
+    const publicKey = await window.crypto.subtle.exportKey(
+      "raw",
+      keyPair.publicKey,
+    );
+    const privateKey = await window.crypto.subtle.exportKey(
+      "pkcs8",
+      keyPair.privateKey,
+    );
+
     return {
-      publicKey: ecdh.getPublicKey("hex"),
-      secretKey: ecdh.getPrivateKey("hex"),
+      publicKey: Buffer.from(publicKey).toString("hex"),
+      secretKey: Buffer.from(privateKey).toString("hex"),
     };
   }
 
@@ -37,49 +58,90 @@ export class SessionCrypto {
     };
   }
 
-  private generateNonce(): Uint8Array {
-    return randomBytes(this.nonceLength);
+  private async generateNonce(): Promise<Uint8Array> {
+    return window.crypto.getRandomValues(new Uint8Array(this.nonceLength));
   }
 
-  public encrypt(message: string, receiverPublicKey: string): Uint8Array {
-    const sharedKey = this.deriveSharedKey(receiverPublicKey);
-    const nonce = this.generateNonce();
-    const cipher = createCipheriv("aes-256-gcm", sharedKey, nonce);
+  public async encrypt(
+    message: string,
+    receiverPublicKey: string,
+  ): Promise<Uint8Array> {
+    const sharedKey = await this.deriveSharedKey(receiverPublicKey);
+    const nonce = await this.generateNonce();
 
-    const encryptedMessage = Buffer.concat([
-      cipher.update(message, "utf8"),
-      cipher.final(),
-    ]);
-    const authTag = cipher.getAuthTag();
-    return mergeByteArrays(nonce, mergeByteArrays(encryptedMessage, authTag));
+    const encryptedMessage = new Uint8Array(
+      await window.crypto.subtle.encrypt(
+        {
+          name: "AES-GCM",
+          iv: nonce,
+        },
+        sharedKey,
+        new TextEncoder().encode(message),
+      ),
+    );
+
+    return mergeByteArrays(nonce, encryptedMessage);
   }
 
-  public decrypt(message: Uint8Array, senderPublicKey: string): string {
-    const [nonce, encryptedMessageWithAuthTag] = divideByteArray(
+  public async decrypt(
+    message: Uint8Array,
+    senderPublicKey: string,
+  ): Promise<string> {
+    const [nonce, encryptedMessage] = divideByteArray(
       message,
       this.nonceLength,
     );
-    const [encryptedMessage, authTag] = divideByteArray(
-      encryptedMessageWithAuthTag,
-      encryptedMessageWithAuthTag.length - 16,
+
+    const sharedKey = await this.deriveSharedKey(senderPublicKey);
+
+    const decrypted = await window.crypto.subtle.decrypt(
+      {
+        name: "AES-GCM",
+        iv: nonce,
+      },
+      sharedKey,
+      encryptedMessage,
     );
 
-    const sharedKey = this.deriveSharedKey(senderPublicKey);
-    const decipher = createDecipheriv("aes-256-gcm", sharedKey, nonce);
-    decipher.setAuthTag(authTag);
-
-    const decrypted = Buffer.concat([
-      decipher.update(encryptedMessage),
-      decipher.final(),
-    ]);
-
-    return decrypted.toString("utf8");
+    return new TextDecoder().decode(decrypted);
   }
 
-  private deriveSharedKey(receiverPublicKey: string): Buffer {
-    const ecdh = createECDH("secp256k1");
-    ecdh.setPrivateKey(Buffer.from(this.keyGen.secretKey, "hex"));
-    return ecdh.computeSecret(Buffer.from(receiverPublicKey, "hex"));
+  private async deriveSharedKey(receiverPublicKey: string): Promise<CryptoKey> {
+    const publicKey = await window.crypto.subtle.importKey(
+      "raw",
+      Buffer.from(receiverPublicKey, "hex"),
+      {
+        name: "ECDH",
+        namedCurve: "P-256",
+      },
+      true,
+      [],
+    );
+
+    const privateKey = await window.crypto.subtle.importKey(
+      "pkcs8",
+      Buffer.from(this.keyGen.secretKey, "hex"),
+      {
+        name: "ECDH",
+        namedCurve: "P-256",
+      },
+      true,
+      ["deriveKey"],
+    );
+
+    return window.crypto.subtle.deriveKey(
+      {
+        name: "ECDH",
+        public: publicKey,
+      },
+      privateKey,
+      {
+        name: "AES-GCM",
+        length: 256,
+      },
+      true,
+      ["encrypt", "decrypt"],
+    );
   }
 
   public stringifyKeypair(): KeyGen {
