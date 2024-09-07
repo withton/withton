@@ -8,6 +8,7 @@ export type SendTransactionResponse =
 export interface SendTransactionSuccessResponse extends SuccessResponse {}
 
 export interface SendTransactionErrorResponse extends ErrorResponse {
+
   error: {
     code: SEND_TRANSACTION_ERROR_CODE;
     message: string;
