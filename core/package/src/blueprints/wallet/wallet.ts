@@ -1,4 +1,4 @@
-import { DeviceInfo, TonProofItem } from '@withton/bridge';
+import { DeviceInfo, WalletSignaturefItem } from '@withton/bridge';
 import { TonAccount } from './account';
 
 /**
@@ -29,6 +29,6 @@ export interface ConnectedWallet {
     /**
      * Proof of ownership for the connected TON account.
      */
-    tonProof: TonProofItem;
+    walletSignature: WalletSignaturefItem;
   };
 }
