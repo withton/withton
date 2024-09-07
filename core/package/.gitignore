@@ -11,9 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-src/connector
-src/blueprints
-src/storage
+
 
 # Editor directories and files
 .vscode/*

@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@withton/bridge':
-    specifier: 0.0.7-rc
-    version: 0.0.7-rc
+    specifier: 0.0.8-rc
+    version: 0.0.8-rc
 
 devDependencies:
   typescript:
@@ -358,8 +358,8 @@ packages:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
 
-  /@withton/bridge@0.0.7-rc:
-    resolution: {integrity: sha512-TI4j6i1Z8x/MEIeB4hSSuT0yjnyQnxPgw6DE6joNYjzzyjc0RmA9Ma/z6mmyqhGybbd0nS4BM/kBQj9f/u1Ihw==}
+  /@withton/bridge@0.0.8-rc:
+    resolution: {integrity: sha512-OwXQ9MP96h3LTv/Q+J5HN4kx3MBGPNAeYvdRY524tKvixb153cLVhejStv28ou6C5e8FXMoqR/hlR2yIWCMUCg==}
     dependencies:
       crypto-browserify: 3.12.0
       js-base64: 3.7.7
