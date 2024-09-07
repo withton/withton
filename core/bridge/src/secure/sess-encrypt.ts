@@ -144,7 +144,7 @@ export class SessionCrypto {
     );
   }
 
-  public stringifyKeypair(): KeyGen {
+  public stringifyKeyGen(): KeyGen {
     return {
       publicKey: this.keyGen.publicKey,
       secretKey: this.keyGen.secretKey,

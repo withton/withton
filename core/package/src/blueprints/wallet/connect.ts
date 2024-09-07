@@ -12,7 +12,7 @@ export interface HTTPConnectionSource {
     /**
      * The URL for the wallet's implementation of the
      */
-    bridgeUrl: string;
+    bridgeLink: string;
 }
 
 /**

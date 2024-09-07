@@ -1,10 +1,10 @@
-export type ConnectItem = TonAddressItem | TonProofItem;
+export type ConnectItem = TonAddressItem | WalletSignaturefItem;
 
 export interface TonAddressItem {
     name: 'ton_address';
 }
 
-export interface TonProofItem {
+export interface WalletSignaturefItem {
     name: 'ton_proof';
     payload: string;
 }
