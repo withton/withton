@@ -13,6 +13,7 @@
     "vite": "^5.4.3"
   },
   "dependencies": {
-    "@withton/bridge": "0.0.8-rc"
+    "@withton/bridge": "0.0.8-rc",
+    "worksapce:*": ""
   }
 }

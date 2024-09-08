@@ -17,7 +17,8 @@ core/kit
 *.launch
 .settings/
 *.sublime-workspace
-.package-lock.json
+
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
