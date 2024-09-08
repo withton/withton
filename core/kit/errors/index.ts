@@ -1,0 +1,1 @@
+export { KitError } from "./error";
