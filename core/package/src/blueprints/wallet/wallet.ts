@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { DeviceInfo, TonProofItem } from '@withton/bridge';
+=======
+import { DeviceInfo, WalletSignaturefItem } from '@withton/bridge';
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
 import { TonAccount } from './account';
 
 /**
@@ -29,6 +33,10 @@ export interface ConnectedWallet {
     /**
      * Proof of ownership for the connected TON account.
      */
+<<<<<<< HEAD
     tonProof: TonProofItem;
+=======
+    walletSignature: WalletSignaturefItem;
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
   };
 }

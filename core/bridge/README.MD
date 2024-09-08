@@ -84,7 +84,11 @@ console.log('Decrypted Message:', decryptedMessage);
 
 - **Returns:** A `Promise` that resolves to the decrypted message as a string.
 
+<<<<<<< HEAD
 #### `stringifyKeypair(): KeyGen`
+=======
+#### `stringifyKeyGen(): KeyGen`
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
 
 - **Returns:** An object containing the `publicKey` and `secretKey` in hex format.
 

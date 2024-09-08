@@ -6,6 +6,7 @@ settings:
 
 dependencies:
   '@withton/bridge':
+<<<<<<< HEAD
     specifier: ^0.0.5
     version: 0.0.5
 
@@ -16,6 +17,18 @@ devDependencies:
   vite:
     specifier: ^5.4.1
     version: 5.4.1
+=======
+    specifier: 0.0.8-rc
+    version: 0.0.8-rc
+
+devDependencies:
+  typescript:
+    specifier: ^5.5.4
+    version: 5.5.4
+  vite:
+    specifier: ^5.4.3
+    version: 5.4.3
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
 
 packages:
 
@@ -358,8 +371,13 @@ packages:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
 
+<<<<<<< HEAD
   /@withton/bridge@0.0.5:
     resolution: {integrity: sha512-ofLcf5qsiNOLPH+fBTtjRS6Y59bSLqQA3WW6jVoblwFvs4z0vKShCzyPe5M8vI4HOYoMSj8D2Z7Y/0IDZwTD/g==}
+=======
+  /@withton/bridge@0.0.8-rc:
+    resolution: {integrity: sha512-OwXQ9MP96h3LTv/Q+J5HN4kx3MBGPNAeYvdRY524tKvixb153cLVhejStv28ou6C5e8FXMoqR/hlR2yIWCMUCg==}
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
     dependencies:
       crypto-browserify: 3.12.0
       js-base64: 3.7.7
@@ -694,8 +712,13 @@ packages:
     resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
     dev: true
 
+<<<<<<< HEAD
   /postcss@8.4.44:
     resolution: {integrity: sha512-Aweb9unOEpQ3ezu4Q00DPvvM2ZTUitJdNKeP/+uQgr1IBIqu574IaZoURId7BKtWMREwzKa9OgzPzezWGPWFQw==}
+=======
+  /postcss@8.4.45:
+    resolution: {integrity: sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==}
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
@@ -846,8 +869,13 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
+<<<<<<< HEAD
   /typescript@5.5.3:
     resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
+=======
+  /typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
@@ -862,8 +890,13 @@ packages:
       inherits: 2.0.3
     dev: false
 
+<<<<<<< HEAD
   /vite@5.4.1:
     resolution: {integrity: sha512-1oE6yuNXssjrZdblI9AfBbHCC41nnyoVoEZxQnID6yvQZAFBzxxkqoFLtHUMkYunL8hwOLEjgTuxpkRxvba3kA==}
+=======
+  /vite@5.4.3:
+    resolution: {integrity: sha512-IH+nl64eq9lJjFqU+/yrRnrHPVTlgy42/+IzbOdaFDVlyLgI/wDlf+FCobXLX1cT0X5+7LMyH1mIy2xJdLfo8Q==}
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -894,7 +927,11 @@ packages:
         optional: true
     dependencies:
       esbuild: 0.21.5
+<<<<<<< HEAD
       postcss: 8.4.44
+=======
+      postcss: 8.4.45
+>>>>>>> e236bfc9aead2a460c2f1142674eba9d72979507
       rollup: 4.21.2
     optionalDependencies:
       fsevents: 2.3.3
