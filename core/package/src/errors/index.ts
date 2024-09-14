@@ -3,6 +3,7 @@ export * from "./binary";
 export * from "./bridge";
 export * from "./manager";
 export * from "./storage";
+export * from './dapp';
 export * from "./wallet";
 export { WithTonConnectionError } from "../config/connect.error";
 export { PlaceholderError } from "./placeholder.error";
