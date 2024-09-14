@@ -25,7 +25,7 @@ core/kit
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
+.npmrc
 # misc
 /.sass-cache
 /connect.lock
