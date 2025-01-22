@@ -77,7 +77,7 @@ export class ConnectorGeteway {
     topic?: RPC,
     options?: {
       ttl?: number;
-      sigal?: AbortSignal;
+      singal?: AbortSignal;
       attempts?: number;
     },
   ): Promise<void>;

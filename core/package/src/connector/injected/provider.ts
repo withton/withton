@@ -151,7 +151,7 @@ export class InjectedConnector<T extends string = string> implements InternalCon
     this.listeners = [];
     this.unsubscribeCallback?.();
   }
-
+ // @ts-ignore
   public async sendRequest<T extends RPC>(
     // @ts-ignore
     request: RemoveId<App<T>>,
