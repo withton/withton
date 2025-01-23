@@ -1,6 +1,5 @@
 import {
   App,
-  ConnectionError,
   ConnectionRequest,
   RPC,
   WalletEvent,
@@ -25,7 +24,11 @@ export interface HTTPController extends BaseController {
       signal?: AbortSignal;
     },
   ): string;
-  unPause(options?: {});
+  pause(): void;
+  unPause(options?: {
+    openingDeadline?: number;
+    signal?: AbortSignal
+  }): Promise<void>;
 }
 
 interface BaseController {
@@ -39,11 +42,22 @@ interface BaseController {
   disconnect(options?: { singal?: AbortSignal }): Promise<void>;
 
   sendRequest<T extends RPC>(
+     // @ts-ignore
     request: RemoveId<App<T>>,
     options?: {
       onRequestSent?: () => void;
       signal?: AbortSignal;
       attempts?: number;
     },
+    // @ts-ignore
   ): Promise<RemoveId<WalletResponse<T>>>;
+
+  sendRequest<T extends RPC>(
+     // @ts-ignore
+    request: RemoveId<App<T>>,
+    onRequestSend?: () => void
+     // @ts-ignore
+  ): Promise<RemoveId<WalletResponse<T>>>;
+ // @ts-ignore
+  listen(eventsCallback: (e: DistributiveRemoveId<WalletEvent>) => void): void;
 }
