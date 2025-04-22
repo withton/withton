@@ -1,0 +1,14 @@
+[install]
+production = true
+frozen-lockfile = true
+
+[install.dependencies]
+typescript = "latest"
+tsup = "latest"
+eslint = "latest"
+@typescript-eslint/parser = "latest"
+@typescript-eslint/eslint-plugin = "latest"
+rimraf = "latest"
+
+[test]
+coverage = true 

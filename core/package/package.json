@@ -1,18 +1,48 @@
 {
-  "name": "package",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "@withton/package",
+  "version": "0.1.0",
+  "description": "TON blockchain wallet integration package",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "test",
+    "prepublishOnly": "build"
+  },
+  "keywords": [
+    "ton",
+    "blockchain",
+    "wallet",
+    "tonkeeper",
+    "tonconnect"
+  ],
+  "author": "WithTon",
+  "license": "MIT",
+  "dependencies": {
+    "@withton/bridge": "^0.0.8-rc",
+    "ton": "^13.9.0"
   },
   "devDependencies": {
-    "typescript": "^5.5.4",
-    "vite": "^5.4.3"
+    "@types/node": "^20.11.24",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0",
+    "rimraf": "^5.0.5",
+    "tsup": "^8.4.0",
+    "typescript": "^5.3.3"
   },
-  "dependencies": {
-    "@withton/bridge": "0.0.8-rc"
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
